@@ -1,0 +1,28 @@
+.panel {
+  float: left;
+  padding-left: 20px;	
+}
+
+.img-contanier {
+  float: left;
+  margin-left: 20px;
+}
+
+.user {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;	
+}
+
+.name {
+  display: inline-block;
+}
+
+.resize {
+	margin-top: 20px;
+}

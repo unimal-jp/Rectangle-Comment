@@ -1,0 +1,115 @@
+<html>
+
+  <head>
+　  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rectangle-Comment Demo</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" src="rectangle_comment.js"></script>
+  </head>
+
+  <body>
+    <h1>Rectangle-Comment Demo</h1>
+
+    <div class="panel">
+      <div class="users">
+        <div>Select user to comment</div>
+        <div class="user">
+          <input type="radio" class="user-radio" name="user-select" checked="checked">
+          <img class="icon" src="img/imaguma.png">
+          <div class="name">imaguma</div>
+        </div>
+        <div class="user">
+          <input type="radio" class="user-radio" name="user-select">
+          <img class="icon" src="img/nagata.png">
+          <div class="name">nagata</div>
+        </div>
+      </div>
+
+      <div class="resize">
+        <div>Resize</div>
+        10%
+        <input id="resize-range" type="range" name="num" min="10" max="100" step="5" value="100">
+        100%
+      </div>
+    </div>
+
+    <div class="img-contanier" style="position: relative">
+      <img id="example" src="example.jpg">
+    </div>
+
+    <script type="text/javascript">
+      var userName = "";
+      var userIcon = "";
+
+      function setUserToComment() {
+        for (var i=0, els=document.getElementsByClassName('user-radio'); i < els.length; i++) {
+      	  if (els[i].checked) {
+      	    var parentNode = els[i].parentNode
+            userName = parentNode.getElementsByClassName("name")[0].innerHTML;
+            userIcon = parentNode.getElementsByClassName("icon")[0].src;
+            break;
+          }
+        }
+      }
+
+      for (var i=0, els=document.getElementsByClassName('user-radio'); i < els.length; i++) {
+        els[i].addEventListener("click", setUserToComment);
+      }
+
+      setUserToComment();
+
+      function formatDate(date) {
+        ret = "YYYY/MM/DD hh:mm:ss";
+        ret = ret.replace("YYYY", date.getFullYear());
+        ret = ret.replace("MM", ('0' + (date.getMonth() + 1)).slice(-2));
+        ret = ret.replace("DD", ('0' + date.getDate()).slice(-2));
+        ret = ret.replace("hh", ('0' + date.getHours()).slice(-2));
+        ret = ret.replace("mm", ('0' + date.getMinutes()).slice(-2));
+        ret = ret.replace("ss", ('0' + date.getSeconds()).slice(-2));
+
+        return ret;
+      };
+
+      var rectangleComment = new RectangleComment("example",
+        //options
+        {
+          resources : {
+            labelAddButton : "Add"
+          },
+
+          onBeforeRectCreated : function(x, y, width, height, color, number, comment) {
+            //Persist data if necessary here.
+
+            var date = new Date();
+
+            return {
+              userName : userName, //option
+              userIcon : userIcon, //option
+              date : formatDate(date) //option
+            };
+          },
+        }
+      );
+
+      //Call addRect() to draw rectangles from persisted date.
+      rectangleComment.addRect(
+        50, 50, 100, 100, 
+        "rgba(255,255,255,0.90)", 
+        "Hello!", 
+        "2016/01/07 10:35:24", 
+        "imaguma", 
+        "img/imaguma.png");
+
+      //Resize image.
+      var slidebar = document.getElementById('resize-range');
+      slidebar.addEventListener('change', function(){
+        rectangleComment.resizeImage(this.value); 
+      }); 
+
+    </script>
+
+  </body>
+
+
+</html>
