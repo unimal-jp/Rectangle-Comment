@@ -6,7 +6,7 @@
 
 ## Description
 
-Rectangle-Comment is a javascript library which makes it possible to comment for a image on a web page with a rectangle.
+Rectangle-Comment is a JavaScript library which makes it possible to comment for a image on a web page with a rectangle.
 
 ## Setup
 
