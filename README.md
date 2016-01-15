@@ -17,3 +17,7 @@ Refer below for more information.
 [API](https://github.com/unimal-jp/Rectangle-Comment/wiki/API)
 
 Refer to index.html included in this repository as a sample code.
+
+## License
+
+Released under the [MIT license](http://opensource.org/licenses/MIT).
